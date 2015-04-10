@@ -1,0 +1,204 @@
+<!doctype html>
+<html>
+	<head>
+	<title>15 Puzzle</title>
+	</head>
+	<script src="./slideLogic.js"></script>
+	<style type="text/css">
+
+		html {
+			background: -webkit-gradient(linear, left top, left bottom, from(#ccc), to(#000)); 
+			width:100%;
+			height:100%
+		}
+
+		/* image is 640 x 640 
+		   tiles need to be 160 x 160
+		*/
+		.tile {
+			width: 160px; height: 160px;
+			background: url(heart.png);
+			margin: 0px auto; padding: 0;
+			border: 1px solid black;
+			position: absolute;
+			-webkit-animation-fill-mode: forwards;
+			-webkit-animation-duration: 0.5s;
+			-webkit-transform: translateZ(0);
+		}
+
+		.label {
+			font-weight: bold;
+		}
+		#metaContainer {
+			width: 815px;
+		}
+
+		#puzzleContainer {
+			position: relative;
+			width: 648px;
+			height: 648px;
+			border: 2px solid black;
+			background: white;
+			float: left;
+			display: inline;
+		}
+
+		#options {
+			display: block;
+			float:right;
+		}
+
+
+		.button {
+			border: 2px solid black;
+			width: 150px;
+			height: 30px;
+			background: #eee; 
+			text-align: center;
+			vertical-align: middle;
+		}
+
+		.info {
+			border: 2px solid black;
+			width: 150px;
+			height: 30px;
+			background: #f0f;
+			text-align: center;
+			vertical-align: middle;
+			position: relative;
+		}
+
+		#tile1 {
+			background-position: 0px 0px;
+		}
+
+		#tile2 {
+			background-position: -160px 0px;
+		}
+
+		#tile3 {
+			background-position: -320px 0px;
+		}
+
+		#tile4 {
+			background-position: -480px 0px;
+		}
+
+
+		#tile5 {
+			background-position: 0px -160px;
+		}
+
+		#tile6 {
+			background-position: -160px -160px;
+		}
+
+		#tile7 {
+			background-position: -320px -160px;
+		}
+
+		#tile8 {
+			background-position: -480px -160px;
+		}
+
+		#tile9 {
+			background-position: 0px -320px;
+		}
+
+		#tile10 {
+			background-position: -160px -320px;
+		}
+
+		#tile11 {
+			background-position: -320px -320px;
+		}
+
+		#tile12 {
+			background-position: -480px -320px;
+		}
+
+		#tile13 {
+			background-position: 0px -480px;
+		}
+
+		#tile14 {
+			background-position: -160px -480px;
+		}
+
+		#tile15 {
+			background-position: -320px -480px;
+		}
+
+		#tile0 {
+			background: white;
+			border: 1px solid white;
+		}
+
+		@-webkit-keyframes up {
+			0% { -webkit-transform: translateY(0); }
+		  100% { -webkit-transform: translateY(162px);}
+		}
+
+		@-webkit-keyframes down {
+			0% { -webkit-transform: translateY(0); }
+		  100% { -webkit-transform: translateY(-162px);}
+		}
+
+		@-webkit-keyframes right {
+		  0%   { -webkit-transform: translateX(0); }
+		  100% { -webkit-transform: translateX(162px);}
+		}
+
+		@-webkit-keyframes left {
+			0% { -webkit-transform: translateX(0); }
+		  100% { -webkit-transform: translateX(-162px);}
+		}
+
+		.animateUp {
+		 -webkit-animation-name: up;
+		}
+
+		.animateDown {
+		 -webkit-animation-name: down;
+		}
+
+		.animateRight {
+		 -webkit-animation-name: right;
+		}
+
+		.animateLeft {
+		 -webkit-animation-name: left;
+		}
+	</style>
+	<body onload="javascript:positionTiles();">
+		<div id="metaContainer">
+			<div id="puzzleContainer">
+				<div id="tile0" class="tile"></div>
+				<div id="tile1" class="tile"></div>
+				<div id="tile2" class="tile"></div>
+				<div id="tile3" class="tile"></div>
+				<div id="tile4" class="tile"></div>
+				<div id="tile5" class="tile"></div>
+				<div id="tile6" class="tile"></div>
+				<div id="tile7" class="tile"></div>
+				<div id="tile8" class="tile"></div>
+				<div id="tile9" class="tile"></div>
+				<div id="tile10" class="tile"></div>
+				<div id="tile11" class="tile"></div>
+				<div id="tile12" class="tile"></div>
+				<div id="tile13" class="tile"></div>
+				<div id="tile14" class="tile"></div>
+				<div id="tile15" class="tile" name="space"></div>
+			</div>
+			<div id="options">
+				<div class="label">OPTIONS</div>
+				<div class="button" onclick="javascript:scrambleIt()">Scramble</div>
+				<div class="button" onclick="javascript:solve()">Solve</div>
+				<div class="label">STATS</div>
+				<div class="info">Moves: <span id="movCount"></span></div>
+			</div>
+		</div>
+	</body>
+</html>
+
+
